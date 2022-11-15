@@ -1,6 +1,8 @@
 package org.hgarcia.springcloud.msvc.usuarios.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="usuarios")
@@ -9,10 +11,13 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String nombre;
+    @Email
     @Column(unique = true)
+    @NotBlank
     private String email;
-
+    @NotBlank
     private String password;
 
     public Long getId() {
@@ -22,7 +27,6 @@ public class Usuario {
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getNombre() {
         return nombre;
     }
