@@ -55,7 +55,9 @@ public class UsuarioController {
         Optional<Usuario> o = service.porId(id);
         if (o.isPresent()) {
             Usuario usuarioDb = o.get();
-            if(!usuario.getEmail().equalsIgnoreCase(usuarioDb.getEmail()) && service.porEmail(usuario.getEmail()).isPresent()){
+            if(!usuario.getEmail().isBlank()
+                    && !usuario.getEmail().equalsIgnoreCase(usuarioDb.getEmail())
+                    && service.porEmail(usuario.getEmail()).isPresent()){
                 return ResponseEntity.badRequest()
                         .body(Collections
                                 .singletonMap("mensaje", "!Ya existe un usuario con ese correo electrónico!")) ;
