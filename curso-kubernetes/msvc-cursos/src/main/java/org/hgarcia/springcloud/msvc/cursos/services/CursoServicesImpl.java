@@ -1,5 +1,7 @@
 package org.hgarcia.springcloud.msvc.cursos.services;
 
+import org.hgarcia.springcloud.msvc.cursos.clients.UsuarioClientRest;
+import org.hgarcia.springcloud.msvc.cursos.models.Usuario;
 import org.hgarcia.springcloud.msvc.cursos.models.entity.Curso;
 import org.hgarcia.springcloud.msvc.cursos.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class CursoServicesImpl implements CursoService{
 
     @Autowired
     private CursoRepository repository;
+
+    @Autowired
+    private UsuarioClientRest client;
 
     @Override
     @Transactional(readOnly = true)
@@ -37,5 +42,20 @@ public class CursoServicesImpl implements CursoService{
     @Transactional
     public void eliminar(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Usuario> asignarUsuario(Usuario usuario, Long curso_id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> crearUsuario(Usuario usuario, Long curso_id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> eliminarUsuario(Usuario usuario, Long cursoId) {
+        return Optional.empty();
     }
 }
