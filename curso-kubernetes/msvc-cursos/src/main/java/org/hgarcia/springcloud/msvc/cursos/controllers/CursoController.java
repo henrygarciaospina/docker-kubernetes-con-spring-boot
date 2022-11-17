@@ -1,5 +1,4 @@
 package org.hgarcia.springcloud.msvc.cursos.controllers;
-import feign.Feign;
 import feign.FeignException;
 import org.hgarcia.springcloud.msvc.cursos.models.Usuario;
 import org.hgarcia.springcloud.msvc.cursos.models.entity.Curso;
@@ -9,12 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.validation.Valid;
 import java.util.*;
 
-import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 public class CursoController {
@@ -91,7 +88,7 @@ public class CursoController {
     public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario, @PathVariable Long cursoId){
         Optional<Usuario> o;
         try {
-            o  = service.asignarUsuario(usuario, cursoId);
+            o  = service.crearUsuario(usuario, cursoId);
         }catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Collections.singletonMap("mensaje", "NO se pudo crear el usuario " +
