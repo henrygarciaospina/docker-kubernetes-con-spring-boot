@@ -44,7 +44,7 @@ public class CursoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<? >ediar(@Valid @RequestBody Curso curso, BindingResult result ,@PathVariable Long id){
+    public ResponseEntity<? >editar(@Valid @RequestBody Curso curso, BindingResult result ,@PathVariable Long id){
         if(result.hasErrors()){
             return validar(result);
         }
@@ -59,7 +59,7 @@ public class CursoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<? >eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
         Optional<Curso> o = service.porId(id);
         if (o.isPresent()) {
             service.eliminar(o.get().getId());
@@ -104,7 +104,7 @@ public class CursoController {
     public ResponseEntity<?> eliminarUsuario(@RequestBody Usuario usuario, @PathVariable Long cursoId){
         Optional<Usuario> o;
         try {
-            o  = service.asignarUsuario(usuario, cursoId);
+            o  = service.eliminarUsuario(usuario, cursoId);
         }catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Collections.singletonMap("mensaje", "NO existe el usuario por" +
